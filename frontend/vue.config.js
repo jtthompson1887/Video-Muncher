@@ -1,3 +1,6 @@
+const fs = require('fs');
+console.log("Current Directory:", __dirname);
+
 // vue.config.js
 module.exports = {
   // proxy all webpack dev-server requests starting with /api
@@ -10,7 +13,11 @@ module.exports = {
         ws: true,
         changeOrigin: true
       }
-    }
+    },
+    https: {
+      pfx: fs.readFileSync('keystore.p12'),
+      passphrase: 'VideoMuncherPassword'
+    },
   },
   // Change build paths to make them Maven compatible
   // see https://cli.vuejs.org/config/
