@@ -38,7 +38,7 @@ jobs:
             -Dfile=maven-shared-utils-3.3.4.pom \
             -DgroupId=org.apache.maven.shared \
             -DartifactId=maven-shared-components \
-            -Dversion=34 \
+            -Dversion=3.3.4 \
             -Dpackaging=pom
 
       - name: Debug after
