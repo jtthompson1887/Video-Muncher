@@ -20,38 +20,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Debug before
-        run: echo "Before mvn install"
-
-      - name: Install spring-boot-starter-parent
-        run: |
-          mvn install:install-file \
-            -Dfile=spring-boot-starter-parent-2.7.15.pom \
-            -DgroupId=org.springframework.boot \
-            -DartifactId=spring-boot-starter-parent \
-            -Dversion=2.7.15 \
-            -Dpackaging=pom
-
-      - name: Install maven-shared-utils
-        run: |
-          mvn install:install-file \
-            -Dfile=maven-shared-utils-3.3.4.pom \
-            -DgroupId=org.apache.maven.shared \
-            -DartifactId=maven-shared-utils \
-            -Dversion=3.3.4 \
-            -Dpackaging=pom
-
-      - name: Install maven-shared-components
-        run: |
-          mvn install:install-file \
-            -Dfile=maven-shared-components-34.pom \
-            -DgroupId=org.apache.maven.shared \
-            -DartifactId=maven-shared-components \
-            -Dversion=34 \
-            -Dpackaging=pom
-
-      - name: Debug after
-        run: echo "After mvn install"
+      - name: Wagon
+        run: mvn -B -e -Dmaven.wagon.http.pool=false clean deploy
 
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v2
