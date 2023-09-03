@@ -41,6 +41,15 @@ jobs:
             -Dversion=3.3.4 \
             -Dpackaging=pom
 
+      - name: Install maven-shared-components
+        run: |
+          mvn install:install-file \
+            -Dfile=maven-shared-components-34.pom \
+            -DgroupId=org.apache.maven.shared \
+            -DartifactId=maven-shared-components \
+            -Dversion=34 \
+            -Dpackaging=pom
+
       - name: Debug after
         run: echo "After mvn install"
 
