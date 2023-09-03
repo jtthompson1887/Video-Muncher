@@ -37,7 +37,7 @@ jobs:
           mvn install:install-file \
             -Dfile=maven-shared-utils-3.3.4.pom \
             -DgroupId=org.apache.maven.shared \
-            -DartifactId=maven-shared-components \
+            -DartifactId=maven-shared-utils \
             -Dversion=3.3.4 \
             -Dpackaging=pom
 
