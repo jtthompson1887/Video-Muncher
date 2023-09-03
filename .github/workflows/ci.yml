@@ -19,11 +19,28 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Debug before
+        run: echo "Before mvn install"
+
+      - name: Install manually downloaded POM
+        run: |
+          mvn install:install-file \
+            -Dfile=spring-boot-starter-parent-2.7.15.pom \
+            -DgroupId=org.springframework.boot \
+            -DartifactId=spring-boot-starter-parent \
+            -Dversion=2.7.15 \
+            -Dpackaging=pom
+
+      - name: Debug after
+        run: echo "After mvn install"
+
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'adopt'
+
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -31,7 +48,9 @@ jobs:
           key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-node-
+
       - name: Build with Maven
         run: mvn clean install
+
       - name: Test and report coverage
         run: mvn clean test jacoco:report coveralls:report
