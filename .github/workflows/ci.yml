@@ -20,9 +20,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Wagon
-        run: mvn -B -e -Dmaven.wagon.http.pool=false clean deploy
-
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v2
         with:
@@ -38,7 +35,7 @@ jobs:
             ${{ runner.OS }}-node-
 
       - name: Build with Maven
-        run: mvn clean install -X
+        run: mvn -B -e -Dmaven.wagon.http.pool=false clean install -X
 
       - name: Test and report coverage
         run: mvn clean test jacoco:report coveralls:report
